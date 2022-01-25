@@ -17,11 +17,13 @@ class ProjectsService {
     return project
   }
 
-  // TODO create project
+  // NOTE create project
   async create(body) {
     await dbContext.Projects.create(body)
+    return body
   }
-  // TODO delete project
+
+  // NOTE delete project
   async remove(projectId, userId) {
     const original = await this.getById(projectId)
     if (original.creatorId.toString() !== userId) {
@@ -29,6 +31,7 @@ class ProjectsService {
     }
     await dbContext.Projects.findOneAndRemove({ _id: projectId })
   }
+
 }
 
 export const projectsService = new ProjectsService()
