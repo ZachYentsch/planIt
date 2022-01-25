@@ -3,12 +3,7 @@ import { BadRequest } from "../utils/Errors"
 
 class TasksService {
 
-  // NOTE create task
-  async create(task) {
-    const createdTask = await dbContext.Tasks.create(task)
-    return createdTask
-  }
-  // NOTE get tasks by projectId
+
   async getByProject(projectId) {
     const tasks = await dbContext.Tasks.find({ _id: projectId }).populate('creator')
     if (!tasks) {
@@ -16,7 +11,13 @@ class TasksService {
     }
     return tasks
   }
-  // NOTE delete task
+
+  async create(task) {
+    const createdTask = await dbContext.Tasks.create(task)
+    await createdTask.populate('creator', 'name', 'projectId')
+    return createdTask
+  }
+
   async remove(taskId, creatorId) {
     const deletedTask = await dbContext.Tasks.findOneAndDelete({ _id: taskId, creatorId: creatorId })
     if (!deletedTask) {
