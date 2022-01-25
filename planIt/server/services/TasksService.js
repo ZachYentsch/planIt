@@ -5,8 +5,8 @@ class TasksService {
 
   // NOTE create task
   async create(task) {
-    await dbContext.Tasks.create(task)
-    return task
+    const createdTask = await dbContext.Tasks.create(task)
+    return createdTask
   }
   // NOTE get tasks by projectId
   async getByProject(projectId) {

@@ -4,8 +4,8 @@ import { BadRequest } from "../utils/Errors"
 class NotesService {
   // NOTE creat note
   async create(note) {
-    await dbContext.Notes.create(note)
-    return note
+    const createdNote = await dbContext.Notes.create(note)
+    return createdNote
   }
   // NOTE get notes by projectId
   async getByProject(projectId) {
