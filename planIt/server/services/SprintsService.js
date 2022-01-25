@@ -7,6 +7,7 @@ class SprintsService {
 
   async create(sprint) {
     await dbContext.Sprints.create(sprint)
+
     return sprint
   }
 
