@@ -16,7 +16,7 @@ class SprintsService {
 
   async create(sprint) {
     const createdSprint = await dbContext.Sprints.create(sprint)
-    await createdSprint.populate('creator', 'name', 'projectId')
+    await createdSprint.populate('creator', 'name projectId')
     return createdSprint
   }
 
