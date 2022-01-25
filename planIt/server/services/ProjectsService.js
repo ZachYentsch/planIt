@@ -25,12 +25,12 @@ class ProjectsService {
   }
 
   // NOTE delete project
-  async remove(projectId, creatorId) {
-    const original = await this.getById(projectId)
-    if (original.creatorId.toString() !== creatorId) {
+  async remove(id, userId) {
+    const original = await this.getById(id)
+    if (original.creatorId.toString() !== userId) {
       throw new BadRequest('Cannot Delete')
     }
-    await dbContext.Projects.findOneAndRemove({ _id: projectId, creatorId: creatorId })
+    await dbContext.Projects.findOneAndRemove({ _id: id, creatorId: creatorId })
   }
 
 }
