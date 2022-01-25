@@ -1,11 +1,13 @@
 import BaseController from "../utils/BaseController";
 import { projectsService } from "../services/ProjectsService";
+import { Auth0Provider } from "@bcwdev/auth0provider";
 export class ProjectsController extends BaseController {
 
 
   constructor() {
     super("api/projects")
     this.router
+      .use(Auth0Provider.getAuthorizedUserInfo)
       // NOTE Get All projects is getUserProjects
       .get('', this.getUsersProjects)
 
@@ -13,8 +15,8 @@ export class ProjectsController extends BaseController {
       .get('/:id', this.getProjectsById)
       // NOTE create project
       .post('', this.createProject)
-    // TODO delete project
-
+      // NOTE delete project
+      .delete('', this.removeProject)
 
   }
 
