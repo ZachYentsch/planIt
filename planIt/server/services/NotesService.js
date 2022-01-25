@@ -12,7 +12,7 @@ class NotesService {
 
   async create(note) {
     const createdNote = await dbContext.Notes.create(note)
-    await createdNote.populate('creator', 'body', 'projectId')
+    await createdNote.populate('creator', 'body projectId')
     return createdNote
   }
 
