@@ -23,6 +23,7 @@ export class NotesController extends BaseController {
 
   async create(req, res, next) {
     try {
+      req.body.taskId
       req.body.creatorId = req.userInfo.creatorId
       const note = await notesService.create(req.body)
       return res.send(note)
