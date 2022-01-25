@@ -25,7 +25,7 @@ export class TasksController extends BaseController {
         try {
             req.body.creatorId = req.userInfo.id
             req.body.projectId = req.params.projectId
-            req.body.sprintId = req.params.projectId
+            req.body.sprintId = req.params.sprintId
             const task = await tasksService.create(req.body)
             return res.send(task)
         } catch (error) {
