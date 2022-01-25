@@ -5,7 +5,7 @@ class SprintsService {
 
   // NOTE create sprint
 
-  async createSprint(sprint) {
+  async create(sprint) {
     await dbContext.Sprints.create(sprint)
     return sprint
   }
@@ -13,7 +13,7 @@ class SprintsService {
   async getByProject(projectId) {
     const sprints = await dbContext.Sprints.find({ _id: projectId }).populate('creator')
     if (!sprints) {
-      throw new BadRequest('sprints unknown')
+      throw new BadRequest('Sprints Unknown')
     }
     return sprints
   }
