@@ -51,6 +51,7 @@ export class ProjectsController extends BaseController {
 
     try {
       await projectsService.remove(req.params.id, req.userInfo.id)
+      return res.send("delorted")
     } catch (error) {
       next(error)
     }

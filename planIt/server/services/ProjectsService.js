@@ -30,7 +30,7 @@ class ProjectsService {
     if (original.creatorId.toString() !== userId) {
       throw new BadRequest('Cannot Delete')
     }
-    await dbContext.Projects.findOneAndRemove({ _id: id, creatorId: creatorId })
+    await dbContext.Projects.findOneAndRemove({ _id: id, creatorId: userId })
   }
 
 }
