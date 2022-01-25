@@ -34,6 +34,7 @@ class TasksService {
     }
     original.name = updated.name || original.name
     original.weight = updated.weight || original.weight
+    original.isComplete = updated.isComplete == null ? original.isComplete : updated.isComplete
     await original.save()
     return original
   }
