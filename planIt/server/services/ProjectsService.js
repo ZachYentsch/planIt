@@ -1,3 +1,6 @@
+import { dbContext } from '../db/DbContext'
+import { BadRequest } from '../utils/Errors'
+
 class ProjectsService {
   // NOTE get all your projects
   async getAll() {
