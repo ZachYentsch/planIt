@@ -3,7 +3,7 @@ import { BadRequest } from "../utils/Errors"
 
 class NotesService {
   async getByProject(projectId) {
-    const notes = await dbContext.Notes.find({ _id: projectId }).populate('creator')
+    const notes = await dbContext.Notes.find({ projectId: projectId }).populate('creator')
     if (!notes) {
       throw new BadRequest('Notes Unknown')
     }
@@ -12,7 +12,7 @@ class NotesService {
 
   async create(note) {
     const createdNote = await dbContext.Notes.create(note)
-    await createdNote.populate('creator', 'body projectId')
+    await createdNote.populate('creator', 'body')
     return createdNote
   }
 

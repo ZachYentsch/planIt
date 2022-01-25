@@ -14,7 +14,7 @@ export class NotesController extends BaseController {
 
   async getByProject(req, res, next) {
     try {
-      const notes = await notesService.getByProject()
+      const notes = await notesService.getByProject(req.params.projectId)
       return res.send(notes)
     } catch (error) {
       next(error)
@@ -23,8 +23,8 @@ export class NotesController extends BaseController {
 
   async create(req, res, next) {
     try {
-      req.body.taskId
-      req.body.creatorId = req.userInfo.creatorId
+      req.body.creatorId = req.userInfo.id
+      req.body.projectId = req.params.projectId
       const note = await notesService.create(req.body)
       return res.send(note)
     } catch (error) {

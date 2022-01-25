@@ -25,8 +25,6 @@ class TasksService {
     }
     return deletedTask
   }
-
-  // NOTE edit task
   async edit(updated) {
     const original = await dbContext.Tasks.findById(updated.id)
     if (original.creatorId.toString() !== updated.creatorId) {
@@ -35,6 +33,7 @@ class TasksService {
     original.name = updated.name || original.name
     original.weight = updated.weight || original.weight
     original.isComplete = updated.isComplete == null ? original.isComplete : updated.isComplete
+    original.sprintId = updated.sprintId || original.sprintId
     await original.save()
     return original
   }
