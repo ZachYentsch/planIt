@@ -19,8 +19,8 @@ class ProjectsService {
 
   // NOTE create project
   async create(body) {
-    await dbContext.Projects.create(body)
-    return body
+    const createdProject = await dbContext.Projects.create(body)
+    return createdProject
   }
 
   // NOTE delete project

@@ -16,7 +16,7 @@ export class ProjectsController extends BaseController {
       // NOTE create project
       .post('', this.createProject)
       // NOTE delete project
-      .delete('', this.removeProject)
+      .delete('/:id', this.removeProject)
 
   }
 
