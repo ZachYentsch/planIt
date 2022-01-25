@@ -23,9 +23,10 @@ export class TasksController extends BaseController {
     }
     async create(req, res, next) {
         try {
-            req.body.creatorId = req.userInfo.creatorId
+            req.body.creatorId = req.userInfo.id
             req.body.projectId = req.params.projectId
             req.body.sprintId = req.params.projectId
+            req.body.isComplete = req.params.projectId
             const task = await tasksService.create(req.body)
             return res.send(task)
         } catch (error) {
