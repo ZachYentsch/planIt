@@ -5,7 +5,7 @@ class TasksService {
 
 
   async getByProject(projectId) {
-    const tasks = await dbContext.Tasks.find({ _id: projectId }).populate('creator')
+    const tasks = await dbContext.Tasks.find({ projectId: projectId }).populate('creator')
     if (!tasks) {
       throw new BadRequest('Task Unknown')
     }
