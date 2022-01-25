@@ -15,7 +15,7 @@ export class TasksController extends BaseController {
 
     async getByProject(req, res, next) {
         try {
-            const tasks = await tasksService.getByProject()
+            const tasks = await tasksService.getByProject(req.params.projectId)
             return res.send(tasks)
         } catch (error) {
             next(error)
