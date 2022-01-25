@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { sprintsService } from "../services/SprintsService";
 import BaseController from "../utils/BaseController";
 
@@ -6,11 +7,9 @@ export class SprintsController extends BaseController {
   constructor() {
     super("api/projects/:projectId/sprints");
     this.router
-      // NOTE get sprints by project
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getByProject)
-      // NOTE create sprint
       .post('', this.create)
-      // NOTE delete sprint
       .delete('/:id', this.remove)
   }
   async getByProject(req, res, next) {

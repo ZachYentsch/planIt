@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { notesService } from "../services/NotesService";
 import BaseController from "../utils/BaseController";
 
@@ -5,11 +6,9 @@ export class NotesController extends BaseController {
   constructor() {
     super("api/projects/:projectId/notes")
     this.router
-      // NOTE get notes by projectId
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('', this.getByProject)
-      // NOTE creat note
       .post('', this.create)
-      // NOTE delete note
       .delete('/:id', this.remove)
   }
 

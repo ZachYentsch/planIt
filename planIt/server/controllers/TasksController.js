@@ -1,17 +1,15 @@
 import { tasksService } from "../services/TasksService";
 import BaseController from "../utils/BaseController";
+import { Auth0Provider } from "@bcwdev/auth0provider"
 
 export class TasksController extends BaseController {
     constructor() {
         super("api/projects/:projectId/tasks")
         this.router
-            // NOTE get tasks by projectId
+            .use(Auth0Provider.getAuthorizedUserInfo)
             .get('', this.getByProject)
-            // NOTE create task
             .post('', this.create)
-            // NOTE delete task
             .delete('/:id', this.remove)
-            // NOTE edit task
             .put('/:id', this.edit)
     }
 
