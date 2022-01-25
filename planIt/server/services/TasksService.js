@@ -14,7 +14,7 @@ class TasksService {
 
   async create(task) {
     const createdTask = await dbContext.Tasks.create(task)
-    await createdTask.populate('creator', 'name projectId')
+    await createdTask.populate('creator', 'name isComplete weight')
     return createdTask
   }
 
