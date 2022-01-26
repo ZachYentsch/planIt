@@ -13,6 +13,14 @@
               v-model="editable.name"
               required
             />
+            <label for="Name">Description:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Description..."
+              v-model="editable.description"
+              required
+            />
             <button class="selectable btn btn-primary" @click="createProject">
               Create Project
             </button>
@@ -28,15 +36,17 @@
 import { logger } from '../utils/Logger'
 import { projectsService } from "../services/ProjectsService"
 import Pop from '../utils/Pop'
+import { ref } from '@vue/reactivity'
 export default {
   setup() {
-    const editable = ({})
+    const editable = ref({})
     return {
       editable,
       async createProject() {
         try {
           await projectsService.createProject(editable.value)
-          editable.value = {}
+          editable.value = {},
+            Pop.toast("Project Created")
         } catch (error) {
           Pop.toast(error.message, "error")
           logger.log(error)
