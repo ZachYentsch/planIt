@@ -2,14 +2,12 @@
   <header>
     <Navbar />
   </header>
-  <main>
-    <router-view />
-  </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
+  <main class="container-fluid">
+    <div class="row">
+      <router-view />
     </div>
-  </footer>
+  </main>
+  <footer></footer>
 </template>
 
 <script>
@@ -26,5 +24,4 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
-
 </style>
