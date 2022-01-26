@@ -1,11 +1,13 @@
 <template>
   <h1>Hello from the project page</h1>
+  <CreateSprint />
   {{ project }}
+  {{ sprints }}
 </template>
 
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, ref } from '@vue/runtime-core'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { projectsService } from '../services/ProjectsService'
@@ -16,6 +18,7 @@ import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 export default {
   setup() {
+    const editable = ref({})
     const route = useRoute()
     onMounted(async () => {
       try {
@@ -29,7 +32,9 @@ export default {
       }
     })
     return {
-      project: computed(() => AppState.project)
+      project: computed(() => AppState.project),
+      sprints: computed(() => AppState.sprints),
+
     }
   }
 }
