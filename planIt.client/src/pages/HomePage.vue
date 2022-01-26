@@ -16,14 +16,14 @@ export default {
   name: 'Home',
   setup() {
     const editable = ref("");
-    onMounted(async () => {
-      try {
-        await projectsService.getAllProjects()
-      } catch (error) {
-        Pop.toast(error.message, "error")
-        logger.log(error)
-      }
-    });
+    // onMounted(async () => {
+    //   try {
+    //     await projectsService.getAllProjects()
+    //   } catch (error) {
+    //     Pop.toast(error.message, "error")
+    //     logger.log(error)
+    //   }
+    // });
     return {
       projects: computed(() => AppState.projects)
     }

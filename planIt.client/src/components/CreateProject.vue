@@ -49,7 +49,7 @@ export default {
             Pop.toast("Project Created")
         } catch (error) {
           Pop.toast(error.message, "error")
-          logger.log(error)
+          logger.error(error)
         }
       }
     }

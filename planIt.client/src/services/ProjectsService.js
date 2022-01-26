@@ -6,7 +6,13 @@ class ProjectsService {
     async getAllProjects() {
         const res = await api.get('api/projects')
         logger.log(res.data)
-        AppState.projects = res.data.projects
+        AppState.projects = res.data
+    }
+
+    async getProjectById(id) {
+        const res = await api.get('api/projects/' + id)
+        logger.log('Get project By id', res.data)
+        AppState.project = res.data
     }
 
     async createProject(newProject) {

@@ -5,5 +5,12 @@ export const AppState = reactive({
   user: {},
   account: {},
   projects: [],
+  project: {},
+  sprints: [],
+  sprint: {},
+  notes: [],
+  note: {},
+  tasks: [],
+  task: {}
 
 })
