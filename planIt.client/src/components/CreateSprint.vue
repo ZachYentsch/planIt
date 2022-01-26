@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="card w-100 bg-dark mt-3">
       <div class="card-body">
-        <h5 class="card-title text-center">Create Project</h5>
+        <h5 class="card-title text-center">Create Sprint</h5>
         <form>
           <div class="">
             <label for="Name">Name:</label>
@@ -25,14 +25,15 @@
 
 
 <script>
-import { computed, onMounted, ref } from '@vue/runtime-core'
+import { ref } from '@vue/reactivity'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { sprintsService } from '../services/SprintsService'
 export default {
   setup() {
+    const editable = ref({})
     return {
-
+      editable,
       async createSprint() {
         try {
           await sprintsService.createSprint(editable.value)

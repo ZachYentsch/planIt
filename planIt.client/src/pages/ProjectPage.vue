@@ -2,7 +2,6 @@
   <h1>Hello from the project page</h1>
   <CreateSprint />
   {{ project }}
-  {{ sprints }}
 </template>
 
 
@@ -18,7 +17,6 @@ import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 export default {
   setup() {
-    const editable = ref({})
     const route = useRoute()
     onMounted(async () => {
       try {
