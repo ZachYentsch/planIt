@@ -10,6 +10,7 @@ import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { projectsService } from '../services/ProjectsService'
 import { sprintsService } from '../services/SprintsService'
+import { tasksService } from '../services/TasksService'
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 export default {
@@ -19,7 +20,7 @@ export default {
       try {
         await projectsService.getProjectById(route.params.id)
         await sprintsService.getSprints(route.params.id)
-        // TODO get Tasks
+        await tasksService.getTasks(route.params.id)
         // TODO get notes
       } catch (error) {
         Pop.toast(error.message, 'error')
