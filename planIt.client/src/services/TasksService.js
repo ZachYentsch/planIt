@@ -5,7 +5,7 @@ import { api } from "./AxiosService"
 class TasksService {
   async getTasks(projectId) {
     const res = await api.get(`api/projects/${projectId}/tasks`)
-    logger.log(res.data)
+    logger.log('Tasks res', res.data)
     AppState.tasks = res.data
   }
 }
