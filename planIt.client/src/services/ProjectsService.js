@@ -20,6 +20,12 @@ class ProjectsService {
         logger.log(res.data)
         AppState.projects.unshift(res.data)
     }
+
+    async removeProject(id) {
+        const res = await api.delete('api/projects/' + id)
+        logger.log('remove project', res.data)
+        AppState.project = res.data
+    }
 }
 
 export const projectsService = new ProjectsService()
