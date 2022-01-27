@@ -1,7 +1,7 @@
 <template>
   <h1>Hello from the project page</h1>
   <CreateSprint />
-  <Sprint />
+  <Sprint v-for="s in sprints" :key="s.id" :sprint="s" />
 </template>
 
 
