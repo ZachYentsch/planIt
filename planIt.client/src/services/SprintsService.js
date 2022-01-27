@@ -15,6 +15,8 @@ class SprintsService {
         logger.log(res.data)
         AppState.sprints.unshift(res.data)
     }
+
+
 }
 
 export const sprintsService = new SprintsService()
