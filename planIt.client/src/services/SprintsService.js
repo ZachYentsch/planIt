@@ -6,7 +6,7 @@ class SprintsService {
 
     async getSprints(id) {
         const res = await api.get(`api/projects/${id}/sprints`)
-        logger.log('sprints res', res.data)
+        logger.log('sprint res', res.data)
         AppState.sprints = res.data
     }
 
@@ -16,7 +16,11 @@ class SprintsService {
         AppState.sprints.unshift(res.data)
     }
 
-
+    async removeSprint(projectId, id) {
+        const res = await api.delete(`api/projects/${id}/sprints/` + projectId)
+        logger.log('remove Sprint', res.data)
+        AppState.sprints = AppState.sprints.filter(s => s.id != s.id)
+    }
 }
 
 export const sprintsService = new SprintsService()
