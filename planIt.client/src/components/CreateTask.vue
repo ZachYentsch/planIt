@@ -29,14 +29,16 @@ import { ref } from '@vue/reactivity'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { tasksService } from '../services/TasksService'
+import { useRoute } from "vue-router"
 export default {
   setup() {
     const editable = ref({})
+    const route = useRoute()
     return {
       editable,
       async createTask() {
         try {
-          await tasksService.createTask(editable.value)
+          await tasksService.createTask(editable.value, route.params.id)
           editable.value = {}
           Pop.toast('Task Created')
         } catch (error) {

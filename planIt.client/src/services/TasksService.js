@@ -9,7 +9,11 @@ class TasksService {
     AppState.tasks = res.data
   }
 
-
+  async createTask(newTask, id) {
+    const res = await api.post(`api/projects/${id}/tasks`, newTask)
+    logger.log(res.data)
+    AppState.tasks.unshift(res.data)
+  }
 }
 
 export const tasksService = new TasksService()
