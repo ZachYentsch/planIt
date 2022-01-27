@@ -4,7 +4,7 @@
       <div class="card-body mt-3 selectable">
         <h1>{{ project.name }}</h1>
         <p>{{ project.description }}</p>
-        <button class="selectable btn btn-danger" @click="removeProject">
+        <button class="selectable btn btn-danger" @click.stop="removeProject()">
           Delete
         </button>
       </div>
