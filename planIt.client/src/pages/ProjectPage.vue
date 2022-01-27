@@ -1,7 +1,6 @@
 <template>
   <h1>Hello from the project page</h1>
   <CreateSprint />
-  {{ project }}
   <Sprint />
 </template>
 

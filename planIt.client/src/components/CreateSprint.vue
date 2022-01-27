@@ -29,14 +29,16 @@ import { ref } from '@vue/reactivity'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { sprintsService } from '../services/SprintsService'
+import { useRoute } from 'vue-router'
 export default {
   setup() {
     const editable = ref({})
+    const route = useRoute()
     return {
       editable,
       async createSprint() {
         try {
-          await sprintsService.createSprint(editable.value)
+          await sprintsService.createSprint(editable.value, route.params.id)
           editable.value = {}
           Pop.toast('Sprint Created')
         } catch (error) {
