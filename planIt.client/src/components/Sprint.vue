@@ -1,12 +1,7 @@
 <template>
   <div class="col-12">
     <div class="card-lg bg-dark">
-      <div class="card-body mt-3 selectable">
-        <h1>{{ sprint.name }}</h1>
-        <button class="selectable btn btn-danger" @click="removeSprint">
-          Delete
-        </button>
-      </div>
+      <div></div>
     </div>
   </div>
 </template>
@@ -22,8 +17,6 @@ export default {
   },
   setup(props) {
     return {
-
-      async
     }
   }
 }

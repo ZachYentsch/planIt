@@ -2,11 +2,12 @@
   <h1>Hello from the project page</h1>
   <CreateSprint />
   {{ project }}
+  <Sprint />
 </template>
 
 
 <script>
-import { computed, onMounted, ref } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { projectsService } from '../services/ProjectsService'
