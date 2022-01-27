@@ -13,7 +13,17 @@
               v-model="editable.name"
               required
             />
-            <button class="btn btn-primary mdi mdi-plus" @click="createTask">
+            <label for="weight">Weight:</label>
+            <input
+              type="number"
+              class="form-control"
+              placeholder="weight..."
+              v-model="editable.weight"
+              min="1"
+              max="10"
+              required
+            />
+            <button class="btn btn-primary mdi mdi-plus" @click="createTask()">
               Create Task
             </button>
           </div>
@@ -29,16 +39,22 @@ import { ref } from '@vue/reactivity'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { tasksService } from '../services/TasksService'
-import { useRoute } from "vue-router"
+import { useRoute } from 'vue-router'
 export default {
-  setup() {
-    const editable = ref({})
+  props: {
+    sprint: {
+      type: Object,
+      required: true
+    }
+  },
+  setup(props) {
     const route = useRoute()
+    const editable = ref({})
     return {
       editable,
       async createTask() {
         try {
-          await tasksService.createTask(editable.value, route.params.id)
+          await tasksService.createTask(editable.value, route.params.id, props.sprint.id)
           editable.value = {}
           Pop.toast('Task Created')
         } catch (error) {

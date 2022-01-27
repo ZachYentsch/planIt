@@ -6,7 +6,7 @@
           class="selectable"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#collapseTask"
+          :data-bs-target="'#collapseTask' + sprint.id"
           aria-expanded="false"
           aria-controls="collapseTask"
         >
@@ -15,10 +15,14 @@
         <button class="selectable btn btn-danger" @click="removeSprint()">
           Delete
         </button>
-        <div class="collapse collapse-horizontal mt-4" id="collapseTask">
+        <div
+          class="collapse collapse-horizontal mt-4"
+          :id="'collapseTask' + sprint.id"
+        >
           <div class="card card-body text-dark" style="width: 100vh">
-            <CreateTask />
+            <CreateTask :sprint="sprint" />
           </div>
+          <Task v-for="t in tasks" :key="t.id" :task="t" />
         </div>
       </div>
     </div>
@@ -38,13 +42,13 @@ export default {
     sprint: {
       type: Object,
       required: true
-
     }
   },
   setup(props) {
     const route = useRoute()
     return {
       account: computed(() => AppState.account),
+      tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
 
       async removeSprint() {
         try {
@@ -53,7 +57,6 @@ export default {
           Pop.toast(error.message, 'error')
           logger.log(error.message)
         }
-        // Pop.toast('Sprint was Deleted')
       }
     }
   }
