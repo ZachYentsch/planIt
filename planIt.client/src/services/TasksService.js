@@ -8,6 +8,8 @@ class TasksService {
     logger.log('Tasks res', res.data)
     AppState.tasks = res.data
   }
+
+
 }
 
 export const tasksService = new TasksService()
