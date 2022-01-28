@@ -36,6 +36,7 @@ export default {
       async removeProject() {
         try {
           await projectsService.removeProject(props.project.id)
+          // TODO add router push home
         } catch (error) {
           Pop.toast(error.message, 'error')
           logger.log(error.message)

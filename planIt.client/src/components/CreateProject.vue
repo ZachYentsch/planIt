@@ -44,8 +44,10 @@ export default {
       editable,
       async createProject() {
         try {
-          await projectsService.createProject(editable.value)
+          // set variable to the outcome of the api call
+          let createdProject = await projectsService.createProject(editable.value)
           editable.value = {},
+            // NOTE put router . push right here
             Pop.toast("Project Created")
         } catch (error) {
           Pop.toast(error.message, "error")

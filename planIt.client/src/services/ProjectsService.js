@@ -19,6 +19,7 @@ class ProjectsService {
         const res = await api.post('api/projects', newProject)
         logger.log(res.data)
         AppState.projects.unshift(res.data)
+        return res.data
     }
 
     async removeProject(id) {

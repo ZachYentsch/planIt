@@ -11,6 +11,9 @@
       Delete Project
     </button>
   </div>
+  <div>
+    <h4>{{ project.name }}</h4>
+  </div>
   <CreateSprint />
   <Sprint v-for="s in sprints" :key="s.id" :sprint="s" />
 
@@ -35,7 +38,7 @@
         v-for="p in projects"
         :key="p.id"
         :project="p"
-        @click="goToProject()"
+        @click="goToProject(p.id)"
       />
     </div>
   </div>
@@ -43,7 +46,7 @@
 
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { projectsService } from '../services/ProjectsService'
@@ -56,7 +59,7 @@ export default {
   setup() {
     const route = useRoute()
     const router = useRouter()
-    onMounted(async () => {
+    watchEffect(async () => {
       try {
         await projectsService.getProjectById(route.params.id)
         await sprintsService.getSprints(route.params.id)
@@ -70,11 +73,11 @@ export default {
     return {
       projects: computed(() => AppState.projects),
       sprints: computed(() => AppState.sprints),
-
+      project: computed(() => AppState.project),
       // TODO not quite sure on how to router push if the prop is not there
-      async goToProject() {
+      async goToProject(projectId) {
         logger.log('routing in progress')
-        router.push({ name: 'Project', params: { id: props.project.id } })
+        router.push({ name: 'Project', params: { id: projectId } })
       },
       // TODO DOES NOT REMOVE
       async removeProjectfromPage() {

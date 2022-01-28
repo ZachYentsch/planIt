@@ -26,7 +26,7 @@ class TasksService {
     return deletedTask
   }
   async edit(updated) {
-    const original = await dbContext.Tasks.findById(updated.id)
+    const original = await dbContext.Tasks.findById({ _id: updated.id })
     if (original.creatorId.toString() !== updated.creatorId) {
       throw new BadRequest('Unable To Edit')
     }

@@ -3,8 +3,8 @@ import { BadRequest } from '../utils/Errors'
 
 class ProjectsService {
   // NOTE get all your projects
-  async getAll() {
-    const projects = await dbContext.Projects.find().populate('creator', 'name')
+  async getAll(creatorId) {
+    const projects = await dbContext.Projects.find({ creatorId: creatorId }).populate('creator', 'name')
     return projects
   }
 

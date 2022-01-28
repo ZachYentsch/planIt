@@ -34,6 +34,16 @@
     </div>
   </div>
 
+  <!-- TODO get dropdown menu from boostrap, and v-for over the sprints in your appstate -->
+  <!-- <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li v-for="s in sprints" @click="editTask(s)"> </li>
+  </ul>
+</div> -->
+
   <div
     class="offcanvas offcanvas-start text-dark"
     data-bs-scroll="true"
@@ -100,13 +110,17 @@ export default {
           document.getElementById("offcanvasNote" + props.task.id)
         ).toggle()
       },
+      async editTask(newSprintId) {
+        // TODO you need to add this new sprint id to the sprint object, then send to server
+        // Ie: {sprintId: newSprintId}
+      },
 
       // TODO GET THIS REQUEST TO WORK
       async taskComplete() {
         // NOTE if statement?
         // NOTE LET javascript = I dont Know what I am DOING!
         try {
-          await tasksService.taskComplete(props.task.id, route.params.id)
+          await tasksService.taskComplete(props.task, route.params.id)
         } catch (error) {
           logger.log(error.message)
           Pop.toast(error.message, 'error')
