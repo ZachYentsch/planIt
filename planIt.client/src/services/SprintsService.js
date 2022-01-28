@@ -17,8 +17,6 @@ class SprintsService {
     }
 
     async removeSprint(projectId, id) {
-        console.log("WAT")
-        console.trace('Removing sprint')
         const res = await api.delete(`api/projects/${id}/sprints/` + projectId)
         logger.log('remove Sprint', res.data)
         AppState.sprints = AppState.sprints.filter(s => s.id != s.id)

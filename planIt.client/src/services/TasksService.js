@@ -21,6 +21,11 @@ class TasksService {
     logger.log('removed Task', res.data)
     AppState.tasks = AppState.tasks.filter(t => t.id != t.id)
   }
+  async taskComplete(projectId, id) {
+    const res = await api.put(`api/projects/${id}/tasks/` + projectId)
+    logger.log(res.data)
+  }
 }
+
 
 export const tasksService = new TasksService()

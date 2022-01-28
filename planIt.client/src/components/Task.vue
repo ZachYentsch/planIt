@@ -10,6 +10,23 @@
           {{ task.name }}
         </h1>
         <h4>{{ task.weight }}</h4>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownTask"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Task Completed
+            <span v-for="t in tasks" :key="t.id">{{ task.isComplete }}</span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li>
+              <a class="dropdown-item" @click.stop="taskComplete()">Yes</a>
+            </li>
+          </ul>
+        </div>
         <button class="selectable btn btn-danger" @click="removeTask()">
           Delete
         </button>
@@ -82,6 +99,18 @@ export default {
         Offcanvas.getOrCreateInstance(
           document.getElementById("offcanvasNote" + props.task.id)
         ).toggle()
+      },
+
+      // TODO GET THIS REQUEST TO WORK
+      async taskComplete() {
+        // NOTE if statement?
+        // NOTE LET javascript = I dont Know what I am DOING!
+        try {
+          await tasksService.taskComplete(props.task.id, route.params.id)
+        } catch (error) {
+          logger.log(error.message)
+          Pop.toast(error.message, 'error')
+        }
       },
 
       async createNote() {

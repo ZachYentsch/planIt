@@ -12,6 +12,8 @@
         >
           {{ sprint.name }}
         </h1>
+        <!-- TODO Display task weight properly -->
+        <!-- <h1><i class="mdi mdi-weight"></i>{{ task.weight }}</h1> -->
         <button class="selectable btn btn-danger" @click="removeSprint()">
           Delete
         </button>
@@ -48,6 +50,7 @@ export default {
     const route = useRoute()
     return {
       account: computed(() => AppState.account),
+      tasks: computed(() => AppState.tasks),
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
 
       async removeSprint() {
