@@ -7,6 +7,7 @@ export class ProfilesController extends BaseController {
     this.router
       .get('', this.getProfiles)
       .get('/:id', this.getProfile)
+
   }
 
   async getProfiles(req, res, next) {

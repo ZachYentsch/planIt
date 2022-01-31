@@ -73,7 +73,7 @@
           />
         </div>
         <div class="col-12 d-flex justify-content-end">
-          <button class="btn btn-success">Submit</button>
+          <button class="btn btn-success">Edit Profile</button>
         </div>
       </div>
     </form>

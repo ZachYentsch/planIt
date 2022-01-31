@@ -11,7 +11,7 @@ class ProfilesService {
     }
 
     async editProfile(updatedProfile) {
-        const res = await api.put('account/', updatedProfile)
+        const res = await api.put('account', updatedProfile)
         logger.log(res.data)
         AppState.profile = res.data
     }

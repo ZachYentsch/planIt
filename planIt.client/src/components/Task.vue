@@ -11,7 +11,7 @@
         </h1>
         <h4>{{ task.weight }}</h4>
         <div class="dropdown">
-          <button
+          <!-- <button
             class="btn btn-secondary dropdown-toggle"
             type="button"
             id="dropdownTask"
@@ -20,12 +20,29 @@
           >
             Task Completed
             <span v-for="t in tasks" :key="t.id">{{ task.isComplete }}</span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          </button> -->
+          <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
               <a class="dropdown-item" @click.stop="taskComplete()">Yes</a>
             </li>
-          </ul>
+          </ul> -->
+          <div
+            class="btn-group"
+            role="group"
+            aria-label="Basic checkbox toggle button group"
+          >
+            <span v-for="t in tasks" :key="t.id">{{ task.isComplete }}</span>
+            <input
+              type="checkbox"
+              class="btn-check"
+              id="btncheck1"
+              autocomplete="off"
+              @click.stop="taskComplete()"
+            />
+            <label class="btn btn-outline-primary" for="btncheck1"
+              >Task Complete</label
+            >
+          </div>
         </div>
         <button class="selectable btn btn-danger" @click="removeTask()">
           Delete
