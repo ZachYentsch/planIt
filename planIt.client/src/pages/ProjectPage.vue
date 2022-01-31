@@ -74,15 +74,14 @@ export default {
       projects: computed(() => AppState.projects),
       sprints: computed(() => AppState.sprints),
       project: computed(() => AppState.project),
-      // TODO not quite sure on how to router push if the prop is not there
       async goToProject(projectId) {
         logger.log('routing in progress')
         router.push({ name: 'Project', params: { id: projectId } })
       },
-      // TODO DOES NOT REMOVE
-      async removeProjectfromPage() {
+      async removeProjectfromPage(id) {
         try {
-          await projectsService.removeProject(props.project.id)
+          await projectsService.removeProject(route.params.id)
+          router.push({ name: 'Home' })
         } catch (error) {
           Pop.toast(error.message, 'error')
           logger.log(error.message)

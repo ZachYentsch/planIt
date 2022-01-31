@@ -37,18 +37,19 @@ import { logger } from '../utils/Logger'
 import { projectsService } from "../services/ProjectsService"
 import Pop from '../utils/Pop'
 import { ref } from '@vue/reactivity'
+import { useRouter } from 'vue-router'
 export default {
   setup() {
+    const router = useRouter()
     const editable = ref({})
     return {
       editable,
       async createProject() {
         try {
-          // set variable to the outcome of the api call
           let createdProject = await projectsService.createProject(editable.value)
           editable.value = {},
-            // NOTE put router . push right here
             Pop.toast("Project Created")
+          router.push({ name: 'Project', params: { id: createdProject.id } })
         } catch (error) {
           Pop.toast(error.message, "error")
           logger.error(error)

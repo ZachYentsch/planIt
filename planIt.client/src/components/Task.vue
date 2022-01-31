@@ -115,10 +115,7 @@ export default {
         // Ie: {sprintId: newSprintId}
       },
 
-      // TODO GET THIS REQUEST TO WORK
       async taskComplete() {
-        // NOTE if statement?
-        // NOTE LET javascript = I dont Know what I am DOING!
         try {
           await tasksService.taskComplete(props.task, route.params.id)
         } catch (error) {
