@@ -10,8 +10,7 @@
           {{ task.name }}
         </h1>
         <h4>{{ task.weight }}</h4>
-        <div class="dropdown">
-          <!-- <button
+        <!-- <button
             class="btn btn-secondary dropdown-toggle"
             type="button"
             id="dropdownTask"
@@ -21,37 +20,54 @@
             Task Completed
             <span v-for="t in tasks" :key="t.id">{{ task.isComplete }}</span>
           </button> -->
-          <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <!-- <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
             <li>
               <a class="dropdown-item" @click.stop="taskComplete()">Yes</a>
             </li>
           </ul> -->
-          <div
-            class="btn-group"
-            role="group"
-            aria-label="Basic checkbox toggle button group"
+        <!-- NOTE <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
           >
-            <span v-for="t in tasks" :key="t.id">{{ task.isComplete }}</span>
-            <input
-              type="checkbox"
-              class="btn-check"
-              id="btncheck1"
-              autocomplete="off"
-              @click.stop="taskComplete()"
-            />
-            <label class="btn btn-outline-primary" for="btncheck1"
-              >Task Complete</label
-            >
-          </div>
+            Change Sprint
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li v-for="s in sprints" :key="s.id">
+              <a class="dropdown-item" @click="editTask(s)">{{
+                sprint.name
+              }}</a>
+            </li>
+          </ul>
+        </div> -->
+        <div
+          class="btn-group"
+          role="group"
+          aria-label="Basic checkbox toggle button group"
+        >
+          <span v-for="t in tasks" :key="t.id">{{ task.isComplete }}</span>
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="btncheck1"
+            autocomplete="off"
+            @click.stop="taskComplete()"
+          />
+          <label class="btn btn-outline-primary" for="btncheck1"
+            >Task Complete</label
+          >
         </div>
-        <button class="selectable btn btn-danger" @click="removeTask()">
-          Delete
-        </button>
       </div>
+      <button class="selectable btn btn-danger" @click="removeTask()">
+        Delete
+      </button>
     </div>
   </div>
 
-  <!-- TODO get dropdown menu from boostrap, and v-for over the sprints in your appstate -->
+  <!-- get dropdown menu from boostrap, and v-for over the sprints in your appstate -->
   <!-- <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Dropdown button
@@ -120,6 +136,7 @@ export default {
     const editable = ref({});
     return {
       editable,
+      sprints: computed(() => AppState.sprints.filter((s) => s.sprintId == sprintId)),
       notes: computed(() =>
         AppState.notes.filter((n) => n.taskId == props.task.id)
       ),
@@ -129,10 +146,16 @@ export default {
           document.getElementById("offcanvasNote" + props.task.id)
         ).toggle();
       },
-      async editTask(newSprintId) {
-        // TODO you need to add this new sprint id to the sprint object, then send to server
-        // Ie: {sprintId: newSprintId}
-      },
+      // NOTEasync editTask(newSprintId) {
+      //   // TODO you need to add this new sprint id to the sprint object, then send to server
+      //   // Ie: {sprintId: newSprintId}
+      //   try {
+      //     await tasksService.editTask(sprint, { sprintId: newSprintId })
+      //   } catch (error) {
+      //     logger.log(error.message)
+      //     Pop.toast(error.message, 'error')
+      //   }
+      // },
 
       async taskComplete() {
         try {

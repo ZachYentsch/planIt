@@ -26,6 +26,11 @@ class TasksService {
     const res = await api.put(`api/projects/${id}/tasks/` + task.id, task)
     logger.log(res.data)
   }
+
+  async editTask(task, id) {
+    task.sprintId = new task.sprintId
+    const res = await api.put(`api/projects/${id}/tasks/` + task.id, task)
+  }
 }
 
 
