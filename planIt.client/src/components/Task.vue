@@ -83,32 +83,34 @@
 
 
 <script>
-import { computed, ref } from "@vue/reactivity"
-import { AppState } from "../AppState"
-import { useRoute } from 'vue-router'
-import Pop from '../utils/Pop'
-import { logger } from '../utils/Logger'
-import { tasksService } from '../services/TasksService'
-import { notesService } from '../services/NotesService'
-import { Offcanvas } from 'bootstrap'
+import { computed, ref } from "@vue/reactivity";
+import { AppState } from "../AppState";
+import { useRoute } from "vue-router";
+import Pop from "../utils/Pop";
+import { logger } from "../utils/Logger";
+import { tasksService } from "../services/TasksService";
+import { notesService } from "../services/NotesService";
+import { Offcanvas } from "bootstrap";
 export default {
   props: {
     task: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   setup(props) {
-    const route = useRoute()
-    const editable = ref({})
+    const route = useRoute();
+    const editable = ref({});
     return {
       editable,
-      notes: computed(() => AppState.notes.filter(n => n.taskId == props.task.id)),
+      notes: computed(() =>
+        AppState.notes.filter((n) => n.taskId == props.task.id)
+      ),
 
       async noteCanvas() {
         Offcanvas.getOrCreateInstance(
           document.getElementById("offcanvasNote" + props.task.id)
-        ).toggle()
+        ).toggle();
       },
       async editTask(newSprintId) {
         // TODO you need to add this new sprint id to the sprint object, then send to server
@@ -120,27 +122,38 @@ export default {
         // NOTE if statement?
         // NOTE LET javascript = I dont Know what I am DOING!
         try {
-          await tasksService.taskComplete(props.task, route.params.id)
+          await tasksService.taskComplete(props.task, route.params.id);
         } catch (error) {
-          logger.log(error.message)
-          Pop.toast(error.message, 'error')
+          logger.log(error.message);
+          Pop.toast(error.message, "error");
+        }
+      },
+
+      async removeTask(id) {
+        try {
+          await tasksService.removeTask(props.task.id);
+        } catch (error) {
+          Pop.toast(error.message);
+          logger.log(error.message);
         }
       },
 
       async createNote() {
         try {
-          await notesService.createNote(editable.value, route.params.id, props.task.id)
-          editable.value = {}
+          await notesService.createNote(
+            editable.value,
+            route.params.id,
+            props.task.id
+          );
+          editable.value = {};
         } catch (error) {
-          Pop.toast(error.message, "error")
-          logger.log(error)
-
+          Pop.toast(error.message, "error");
+          logger.log(error);
         }
       },
-
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 
