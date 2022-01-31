@@ -13,7 +13,8 @@
           {{ sprint.name }}
         </h1>
         <!-- TODO Display task weight properly -->
-        <h1><i class="mdi mdi-weight bg-light"></i>{{ tasks.weight }}</h1>
+        <h1><i class="mdi mdi-weight"></i></h1>
+        {{ tasks.weight }}
         <button class="selectable btn btn-danger" @click="removeSprint()">
           Delete
         </button>
@@ -38,8 +39,8 @@ import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { sprintsService } from '../services/SprintsService'
-
 import { useRoute } from 'vue-router'
+
 export default {
   props: {
     sprint: {
@@ -57,8 +58,10 @@ export default {
         let total = 0
         tasks.forEach(t => total += t.weight)
         return total
+
       }),
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
+
 
       async removeSprint() {
         try {
