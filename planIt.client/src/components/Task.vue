@@ -129,7 +129,7 @@ export default {
         }
       },
 
-      async removeTask(id) {
+      async removeTask() {
         try {
           await tasksService.removeTask(props.task.id);
         } catch (error) {
