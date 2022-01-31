@@ -14,7 +14,8 @@
         </h1>
         <!-- TODO Display task weight properly -->
         <h1><i class="mdi mdi-weight"></i></h1>
-        {{ tasks.weight }}
+        <h4>{{ tasks.weight }}</h4>
+
         <button class="selectable btn btn-danger" @click="removeSprint()">
           Delete
         </button>
@@ -60,7 +61,7 @@ export default {
         return total
 
       }),
-      tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
+
 
 
       async removeSprint() {
