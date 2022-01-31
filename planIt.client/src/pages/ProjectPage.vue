@@ -46,51 +46,50 @@
 
 
 <script>
-import { computed, onMounted, watchEffect } from '@vue/runtime-core'
-import Pop from '../utils/Pop'
-import { logger } from '../utils/Logger'
-import { projectsService } from '../services/ProjectsService'
-import { sprintsService } from '../services/SprintsService'
-import { notesService } from '../services/NotesService'
-import { tasksService } from '../services/TasksService'
-import { useRoute, useRouter } from 'vue-router'
-import { AppState } from '../AppState'
+import { computed, onMounted, watchEffect } from "@vue/runtime-core";
+import Pop from "../utils/Pop";
+import { logger } from "../utils/Logger";
+import { projectsService } from "../services/ProjectsService";
+import { sprintsService } from "../services/SprintsService";
+import { notesService } from "../services/NotesService";
+import { tasksService } from "../services/TasksService";
+import { useRoute, useRouter } from "vue-router";
+import { AppState } from "../AppState";
 export default {
   setup() {
-    const route = useRoute()
-    const router = useRouter()
+    const route = useRoute();
+    const router = useRouter();
     watchEffect(async () => {
       try {
-        await projectsService.getProjectById(route.params.id)
-        await sprintsService.getSprints(route.params.id)
-        await tasksService.getTasks(route.params.id)
-        await notesService.getNotes(route.params.id)
+        await projectsService.getProjectById(route.params.id);
+        await sprintsService.getSprints(route.params.id);
+        await tasksService.getTasks(route.params.id);
+        await notesService.getNotes(route.params.id);
       } catch (error) {
-        Pop.toast(error.message, 'error')
-        logger.error(error)
+        Pop.toast(error.message, "error");
+        logger.error(error);
       }
-    })
+    });
     return {
       projects: computed(() => AppState.projects),
       sprints: computed(() => AppState.sprints),
       project: computed(() => AppState.project),
       async goToProject(projectId) {
-        logger.log('routing in progress')
-        router.push({ name: 'Project', params: { id: projectId } })
+        logger.log("routing in progress");
+        router.push({ name: "Project", params: { id: projectId } });
       },
       async removeProjectfromPage(id) {
         try {
           await projectsService.removeProject(route.params.id)
           router.push({ name: 'Home' })
         } catch (error) {
-          Pop.toast(error.message, 'error')
-          logger.log(error.message)
+          Pop.toast(error.message, "error");
+          logger.log(error.message);
         }
-      }
-
-    }
-  }
-}
+      },
+    };
+  },
+};
 </script>
 
 
